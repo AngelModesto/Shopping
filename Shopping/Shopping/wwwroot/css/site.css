@@ -19,7 +19,7 @@ body {
 
 @charset "utf-8";
 
-*Zoom images*/
+/*Zoom images*/
 .zoom {
     padding: 5px;
     background-color: transparent;
@@ -34,4 +34,18 @@ body {
     -webkit-transform: scale(2); /* Safari 3-8 */
     transform: scale(2);
 }
+
+/*Carousel*/
+carousel-inner {
+    width: auto;
+    height: 500px;
+    max-height: 500px !important;
+}
+
+.carousel-content {
+    color: black;
+    display: flex;
+    text-align: center;
+}
+
 
