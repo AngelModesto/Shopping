@@ -8,6 +8,7 @@ using Shopping.Data.Entities;
 using Shopping.Enums;
 using Shopping.Helpers;
 using Shopping.Models;
+using Vereyon.Web;
 
 namespace Shopping.Controllers
 {
@@ -20,18 +21,21 @@ namespace Shopping.Controllers
         private readonly IBlobHelper _blobHelper;
         private readonly ICombosHelper _combosHelper;
         private readonly IMailHelper _mailHelper;
+        private readonly IFlashMessage _flashMessage;
 
         public UsersController(DataContext context, 
             IUserHelper userHelper, 
             IBlobHelper blobHelper, 
             ICombosHelper combosHelper,
-            IMailHelper mailHelper)
+            IMailHelper mailHelper,
+            IFlashMessage flashMessage)
         {
             _context = context;
             _userHelper = userHelper;
             _blobHelper = blobHelper;
             _combosHelper = combosHelper;
             _mailHelper = mailHelper;
+            _flashMessage = flashMessage;
         }
 
         public async Task<IActionResult> Index()
@@ -76,7 +80,7 @@ namespace Shopping.Controllers
                 if (user == null)
                 {
 
-                    ModelState.AddModelError(string.Empty, "Este correo ya está siendo usado.");
+                    _flashMessage.Danger(string.Empty, "Este correo ya está siendo usado.");
                     model.Countries = await _combosHelper.GetComboCountriesAsync();
                     model.States = await _combosHelper.GetComboStatesAsync(model.CountryId);
                     model.Cities = await _combosHelper.GetComboCitiesAsync(model.StateId);
@@ -102,7 +106,7 @@ namespace Shopping.Controllers
                     return View(model);
                 }
 
-                ModelState.AddModelError(string.Empty, response.Message);
+                _flashMessage.Danger(string.Empty, response.Message);
 
             }
 

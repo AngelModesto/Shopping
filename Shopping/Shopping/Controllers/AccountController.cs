@@ -142,7 +142,7 @@ namespace Shopping.Controllers
                     return View(model);
                 }
 
-                ModelState.AddModelError(string.Empty, response.Message);
+                _flashMessage.Danger(response.Message);
 
             }
 
@@ -269,7 +269,7 @@ namespace Shopping.Controllers
             {
                 if(model.OldPassword == model.NewPassword)
                 {
-                    ModelState.AddModelError(string.Empty, "Debes ingresar una contrasena diferente.");
+                    _flashMessage.Danger( "Debes ingresar una contrasena diferente.");
                     return View(model);
                 }
                 User? user = await _userHelper.GetUserAsync(User.Identity.Name);
@@ -282,12 +282,12 @@ namespace Shopping.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, result.Errors.FirstOrDefault().Description);
+                        _flashMessage.Danger(result.Errors.FirstOrDefault().Description);
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "User no found.");
+                    _flashMessage.Danger("User no found.");
                 }
             }
 
@@ -323,7 +323,7 @@ namespace Shopping.Controllers
                     $"<h1>Shopping - Recuperación de Contraseña</h1>" +
                     $"Para recuperar la contraseña haga click en el siguiente enlace:" +
                     $"<p><a href = \"{link}\">Reset Password</a></p>");
-                ViewBag.Message = "Las instrucciones para recuperar la contraseña han sido enviadas a su correo.";
+                _flashMessage.Danger("Las instrucciones para recuperar la contraseña han sido enviadas a su correo.");
                 return View();
             }
 
