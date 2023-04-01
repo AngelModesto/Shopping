@@ -139,7 +139,6 @@ namespace Shopping.Controllers
                     _flashMessage.Info("Usuario registrado. Para poder ingresar al sistema, siga las instrucciones que han sido enviadas a su correo.");
                     return RedirectToAction(nameof(Login));
 
-                    return View(model);
                 }
 
                 _flashMessage.Danger(response.Message);
