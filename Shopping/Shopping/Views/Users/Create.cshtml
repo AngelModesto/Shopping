@@ -27,6 +27,7 @@
             <input type="hidden" asp-for="Cities" />
 
             <div class="form-group">
+                <span class="required">*</span>
                 <label asp-for="Username" class="control-label"></label>
                 <input asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
@@ -35,12 +36,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
+                        <span class="required">*</span>
                         <label asp-for="Password" class="control-label"></label>
                         <input asp-for="Password" class="form-control" />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <span class="required">*</span>
                     <div class="form-group">
                         <label asp-for="PasswordConfirm" class="control-label"></label>
                         <input asp-for="PasswordConfirm" class="form-control" />
